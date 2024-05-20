@@ -1,11 +1,7 @@
 package pro.sky.skyprospringtyulkovhw28;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import java.util.Objects;
-import java.util.Random;
-
-import static org.apache.tomcat.util.IntrospectionUtils.capitalize;
 
 public class Employee {
 
@@ -14,21 +10,11 @@ public class Employee {
     private int salary;
     private int departmentId;
 
-
-    public Employee(String name, String surname) {
-        Random random = new Random();
-
-        this.firstName = capitalize(firstName);
-        this.lastName = capitalize(lastName);
-        this.salary = random.nextInt(10_000) + 1000;
-        this.departmentId = random.nextInt(5) + 1;
-    }
-
-    public Employee(String lastName, int departmentId, int salary, String firstName) {
+    public Employee(String lastName, String firstName, int salary, int departmentId) {
         this.lastName = lastName;
-        this.departmentId = departmentId;
-        this.salary = salary;
         this.firstName = firstName;
+        this.salary = salary;
+        this.departmentId = departmentId;
     }
 
     public String getFirstName() {
