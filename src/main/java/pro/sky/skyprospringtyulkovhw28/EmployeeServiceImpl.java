@@ -12,8 +12,16 @@ public class EmployeeServiceImpl implements EmployeeService {
     private static final int EMPLOYEE_STORAGE_SIZE = 10;
     private final Map<String, Employee> employees = new HashMap<>();
 
+    private final ValidationService validationService;
+
+    public EmployeeServiceImpl(ValidationService validationService) {
+        this.validationService = validationService;
+    }
+
 
     public Employee add(String firstName, String lastName, int salary, int departmentId) {
+        firstName = validationService.validateName(firstName);
+        lastName = validationService.validateName(lastName);
         String key = buildKey(firstName, lastName);
         if (employees.containsKey(key)) {
             throw new EmployeeAlreadyAddedExeption();
