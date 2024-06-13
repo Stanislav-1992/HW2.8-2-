@@ -27,12 +27,16 @@ public class DepartmentController {
     public Employee findEmployeeWithMaxSalary(@RequestParam int departmentId) {
         return departmentService.findEmployeeWithMaxSalary(departmentId);
     }
-    @GetMapping(value = "/all", params = {"departmentId"})
+    @GetMapping(value = "/all", params = {"department"})
     public Collection<Employee> findEmployeesByDepartment(@RequestParam int departmentId) {
         return departmentService.findEmployeesByDepartment(departmentId);
     }
     @GetMapping("/all")
-    public Map<Integer, List<Employee>> findEmployeesByDepartment() {
-        return departmentService.findEmployeesByDepartment();
+    public Map<Integer, List<Employee>> findAllEmployeesByDepartment() {
+        return departmentService.findAllEmployeesByDepartment();
+    }
+    @GetMapping(path = "/sum-salary")
+    public Double sumSalaryDepartment(@RequestParam("department") int department) {
+        return departmentService.sumSalaryDepartment(department);
     }
 }

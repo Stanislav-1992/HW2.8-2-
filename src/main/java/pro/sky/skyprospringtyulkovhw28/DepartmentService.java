@@ -12,6 +12,8 @@ public interface DepartmentService {
 
     Collection<Employee> findEmployeesByDepartment(int departmentId);
 
-    Map<Integer, List<Employee>> findEmployeesByDepartment();
+    Map<Integer, List<Employee>> findAllEmployeesByDepartment();
+
+    Double sumSalaryDepartment(int departmentId);
 
 }

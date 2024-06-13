@@ -24,7 +24,7 @@ public class DepartmentServiceImpl implements DepartmentService{
         return employeeService.findAll().stream()
                 .filter(employee -> employee.getDepartmentId() == departmentId)
                 .min(comparingInt(Employee :: getSalary))
-                .orElseThrow(EmployeeNotFoundExeption :: new);
+                .orElseThrow(EmployeeNotFoundException:: new);
     }
 
     @Override
@@ -32,7 +32,7 @@ public class DepartmentServiceImpl implements DepartmentService{
         return employeeService.findAll().stream()
                 .filter(employee -> employee.getDepartmentId() == departmentId)
                 .max(comparingInt(Employee :: getSalary))
-                .orElseThrow(EmployeeNotFoundExeption :: new);
+                .orElseThrow(EmployeeNotFoundException:: new);
     }
 
     @Override
@@ -43,9 +43,16 @@ public class DepartmentServiceImpl implements DepartmentService{
     }
 
     @Override
-    public Map<Integer, List<Employee>> findEmployeesByDepartment() {
+    public Map<Integer, List<Employee>> findAllEmployeesByDepartment() {
         return employeeService.findAll().stream()
                 .collect(groupingBy(Employee :: getDepartmentId));
+    }
+
+    @Override
+    public Double sumSalaryDepartment(int department) {
+        return employeeService.findAll().stream()
+                .filter(employee -> employee.getDepartmentId() == department)
+                .mapToDouble(Employee::getSalary).sum();
     }
 }
 

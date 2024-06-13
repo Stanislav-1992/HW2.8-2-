@@ -24,10 +24,10 @@ public class EmployeeServiceImpl implements EmployeeService {
         lastName = validationService.validateName(lastName);
         String key = buildKey(firstName, lastName);
         if (employees.containsKey(key)) {
-            throw new EmployeeAlreadyAddedExeption();
+            throw new EmployeeAlreadyAddedException();
         }
         if (employees.size() >= EMPLOYEE_STORAGE_SIZE) {
-            throw new EmployeeStorageIsFullExeption();
+            throw new EmployeeStorageIsFullException();
         }
         Employee employee = new Employee(firstName, lastName, salary, departmentId);
         employees.put(key, employee);
@@ -37,7 +37,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee remove(String firstName, String lastName) {
         String key = buildKey(firstName, lastName);
         if (!employees.containsKey(key)) {
-            throw new EmployeeNotFoundExeption();
+            throw new EmployeeNotFoundException();
         }
         return employees.remove(key);
     }
@@ -45,7 +45,7 @@ public class EmployeeServiceImpl implements EmployeeService {
     public Employee find(String firstName, String lastName) {
         String key = buildKey(firstName, lastName);
         if (!employees.containsKey(key)) {
-            throw new EmployeeNotFoundExeption();
+            throw new EmployeeNotFoundException();
         }
         return employees.get(key);
     }

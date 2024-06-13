@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 public class ValidationService {
     public String validateName(String name) {
         if (!StringUtils.isAlpha(name)) {
-            throw new ValidationFailedExeption();
+            throw new ValidationFailedException();
         }
         return StringUtils.capitalize(name.toLowerCase());
     }
